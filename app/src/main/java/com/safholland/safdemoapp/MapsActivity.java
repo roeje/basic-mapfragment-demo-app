@@ -28,10 +28,10 @@ import org.json.JSONObject;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private UrlBuilder urlBuilder = new UrlBuilder();
 
     private String url = "http://api.safholland.us/v3/gqss?uom=metric&type=ss";
-    private String urlGR = "http://api.safholland.us/v3/gqss?uom=imperial&type=ss&origLat=42.9633599&origLng=-85.66808630000003&origAddress=grand+rapids%2C+mi&formattedAddress=Grand+Rapids%" +
-            "2C+MI%2C+USA&boundsNorthEast=%7B%22lat%22%3A43.0290509%2C%22lng%22%3A-85.56864589999998%7D&boundsSouthWest=%7B%22lat%22%3A42.8836659%2C%22lng%22%3A-85.75153209999996%7D";
+    private String urlGR = "http://api.safholland.us/v3/gqss?uom=imperial&type=ss&origLat=42.9633599&origLng=-85.66808630000003";
     private JSONArray serviceStations = new JSONArray();
 
     @Override
@@ -45,7 +45,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    public void getCurrentLocation() {
+        // Fleetboard SDK api call to get vehicles current location
+    }
+
     public void fetchServiceStations() {
+
+        String url = urlBuilder.createServiceUrl();
 
         JsonArrayRequest jsObjRequest = new JsonArrayRequest
             (Request.Method.GET, urlGR, null, new Response.Listener<JSONArray>() {
